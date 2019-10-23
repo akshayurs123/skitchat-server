@@ -1,4 +1,4 @@
-package hello;
+package hello.DbInterface;
 
 import org.springframework.data.repository.CrudRepository;
 
