@@ -1,4 +1,4 @@
-package hello;
+package hello.RestController;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hello.InboxData;
+import hello.ResponseItem;
 import hello.DbInterface.MessageRepository;
 import hello.DbInterface.SoulRepository;
 import hello.Entity.MessageEntity;
@@ -25,7 +27,9 @@ public class MessageController {
 
 
 	@RequestMapping("/greeting")
-	public ResponseItem greeting() {
+	public Object greeting() {
+		// throw new RuntimeException("Invalid employee id : " + TAG);
+		 //return TAG;
 		return getDefaultResponse("Server test","Server responding","Pass");
 	}
 
