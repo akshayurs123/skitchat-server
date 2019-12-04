@@ -30,7 +30,7 @@ public class MessageController {
 	public Object greeting() {
 		// throw new RuntimeException("Invalid employee id : " + TAG);
 		 //return TAG;
-		return getDefaultResponse("Server test","Server responding","Pass");
+		return getDefaultResponse("Server test2","Server responding","Pass");
 	}
 
 
