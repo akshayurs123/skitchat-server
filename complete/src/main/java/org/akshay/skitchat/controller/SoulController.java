@@ -45,7 +45,7 @@ public class SoulController {
 
 		SoulEntity soulEntity = soulRepository.authenticateSoul(loginEntity.getUsername(),loginEntity.getPassword());
 		if(soulEntity == null) {
-			throw new RestApiException("Wrong usernam/password",400);
+			throw new RestApiException("Wrong usernam/password",500);
 		}
 		else{return soulEntity;}	
 
