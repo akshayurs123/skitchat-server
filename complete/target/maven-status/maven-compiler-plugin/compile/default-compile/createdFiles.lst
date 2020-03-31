@@ -1,0 +1,10 @@
+hello\DbInterface\SoulRepository.class
+hello\Entity\LoginEntity.class
+hello\Entity\MessageEntity.class
+hello\Entity\SoulEntity.class
+hello\InboxData.class
+hello\RestController\MessageController.class
+hello\RestController\SoulController.class
+hello\Application.class
+hello\DbInterface\MessageRepository.class
+hello\ResponseItem.class
