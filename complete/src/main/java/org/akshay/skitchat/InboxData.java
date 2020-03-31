@@ -1,10 +1,12 @@
-package hello;
+package org.akshay.skitchat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import hello.Entity.MessageEntity;
+import org.akshay.skitchat.entity.MessageEntity;
+
+
 
 public class InboxData implements Serializable{
 
