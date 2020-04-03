@@ -33,8 +33,10 @@ public class SoulController {
 			soulRepository.save(soul);
 			return soul;
 		}else {
-			throw new RestApiException("Username alredy exist",403,SCConst.USER_NOT_FOUND);
-			 
+			//throw new RestApiException("Username alredy exist",403,SCConst.USER_NOT_FOUND);
+			soul.setSuccessful(false);
+			soul.setResponseMessage("Username alredy exist");
+			return soul;
 		}
 
 	}
@@ -46,10 +48,14 @@ public class SoulController {
 
 		SoulEntity soulEntity = soulRepository.authenticateSoul(loginEntity.getUsername(),loginEntity.getPassword());
 		if(soulEntity == null) {
-			throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL);
+			soulEntity = new SoulEntity();
+			soulEntity.setSuccessful(false);
+			soulEntity.setResponseMessage("Wrong username/password");
+			return soulEntity;
+			//throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL);
 		}
 		else{return soulEntity;}	
- 
+
 	}
 
 	@RequestMapping(value = { "/forgotpsw" }, method = RequestMethod.POST)

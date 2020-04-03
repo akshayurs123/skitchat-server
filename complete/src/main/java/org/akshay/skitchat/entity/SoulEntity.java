@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.annotation.Transient;
+
 @Entity
 public class SoulEntity {
 
@@ -23,6 +25,10 @@ public class SoulEntity {
     private  String fu2;
     private  String fu3;
     private  String fcmToken;
+    @Transient
+    private  boolean isSuccessful;
+    @Transient
+    private  String responseMessage;
     
     public SoulEntity(){}
 
@@ -129,6 +135,22 @@ public class SoulEntity {
 
 	public void setFcmToken(String fcmToken) {
 		this.fcmToken = fcmToken;
+	}
+
+	public boolean isSuccessful() {
+		return isSuccessful;
+	}
+
+	public void setSuccessful(boolean isSuccessful) {
+		this.isSuccessful = isSuccessful;
+	}
+
+	public String getResponseMessage() {
+		return responseMessage;
+	}
+
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
 	}
 
  
