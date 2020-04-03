@@ -1,6 +1,6 @@
-package org.akshay.skitchat;
+package org.akshay.skitchat.entity;
 
-public class ErrorResponse {
+public class ErrorResponseEntity {
 
 	int errorCode;
 	String errorType;

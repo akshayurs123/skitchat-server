@@ -3,8 +3,8 @@ package org.akshay.skitchat.controller;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.akshay.skitchat.ErrorResponse;
 import org.akshay.skitchat.InboxData;
+import org.akshay.skitchat.entity.ErrorResponseEntity;
 import org.akshay.skitchat.entity.MessageEntity;
 import org.akshay.skitchat.repository.MessageRepository;
 import org.akshay.skitchat.repository.SoulRepository;
@@ -37,7 +37,7 @@ public class MessageController {
 
 
 	@RequestMapping(value= {"/send"},method =RequestMethod.POST)
-	public ErrorResponse send(@RequestBody MessageEntity message) {
+	public ErrorResponseEntity send(@RequestBody MessageEntity message) {
 		message.setMessageId(UUID.randomUUID().toString());
 		messageRepository.save(message);
 		return getErrorCode(200,"Message sent","Success");
@@ -56,35 +56,35 @@ public class MessageController {
 	}
 
 	@RequestMapping(value= {"/messages/delete"},method =RequestMethod.GET)
-	public ErrorResponse getInbox(@RequestParam (value="messageId") String messageId ) {
+	public ErrorResponseEntity getInbox(@RequestParam (value="messageId") String messageId ) {
 		messageRepository.deleteMessage(messageId);
-		ErrorResponse ri = new ErrorResponse();
+		ErrorResponseEntity ri = new ErrorResponseEntity();
 		ri.setErrorMessage("Message");
 		return ri;
 	}
 
 
 	@RequestMapping(value= {"/read"},method =RequestMethod.GET)
-	public ErrorResponse read(@RequestParam (value="messageId") String messageId,@RequestParam (value="readStatus") String readStatus) {
+	public ErrorResponseEntity read(@RequestParam (value="messageId") String messageId,@RequestParam (value="readStatus") String readStatus) {
 		messageRepository.setRead(messageId,readStatus);
-		ErrorResponse ri = new ErrorResponse();
+		ErrorResponseEntity ri = new ErrorResponseEntity();
 		ri.setErrorMessage("messageId set to read");
 		return ri;
 	}
 
 
 	@RequestMapping(value= {"/sentmessage"},method =RequestMethod.GET)
-	public ErrorResponse getSentMessage(@RequestParam (value="soulId") String soulId , @RequestParam (value="limit") int limit) {
+	public ErrorResponseEntity getSentMessage(@RequestParam (value="soulId") String soulId , @RequestParam (value="limit") int limit) {
 		messageRepository.getSentMessage(soulId);
-		ErrorResponse ri = new ErrorResponse();
+		ErrorResponseEntity ri = new ErrorResponseEntity();
 		ri.setErrorMessage("messageId set to read");
 		return ri;
 	}
 
 
 
-	public ErrorResponse getErrorCode(int errorCode, String errorType, String errorMessage) {
-		ErrorResponse e = new ErrorResponse();
+	public ErrorResponseEntity getErrorCode(int errorCode, String errorType, String errorMessage) {
+		ErrorResponseEntity e = new ErrorResponseEntity();
 		e.setErrorCode(errorCode);
 		e.setErrorType(errorType);
 		e.setErrorMessage(errorMessage);

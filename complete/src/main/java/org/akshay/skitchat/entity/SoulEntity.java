@@ -22,6 +22,7 @@ public class SoulEntity {
     private  String fu1;
     private  String fu2;
     private  String fu3;
+    private  String fcmToken;
     
     public SoulEntity(){}
 
@@ -120,6 +121,14 @@ public class SoulEntity {
 
 	public void setFu3(String fu3) {
 		this.fu3 = fu3;
+	}
+
+	public String getFcmToken() {
+		return fcmToken;
+	}
+
+	public void setFcmToken(String fcmToken) {
+		this.fcmToken = fcmToken;
 	}
 
  

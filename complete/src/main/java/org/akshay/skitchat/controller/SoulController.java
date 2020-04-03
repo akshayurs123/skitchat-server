@@ -3,9 +3,9 @@ package org.akshay.skitchat.controller;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.akshay.skitchat.ErrorResponse;
 import org.akshay.skitchat.InboxData;
 import org.akshay.skitchat.RestApiException;
+import org.akshay.skitchat.entity.ErrorResponseEntity;
 import org.akshay.skitchat.entity.LoginEntity;
 import org.akshay.skitchat.entity.SoulEntity;
 import org.akshay.skitchat.repository.SoulRepository;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import util.SCConst;
 
 @RestController
 public class SoulController {
@@ -29,11 +31,10 @@ public class SoulController {
 		soul.setSoulId(UUID.randomUUID().toString());
 		if( validateNewSoulData(soul)) {
 			soulRepository.save(soul);
-
 			return soul;
 		}else {
-			throw new RestApiException("Username alredy exsit",400);
-			//return getErrorCode(400,"Invalid operation","Username/email already exsits");
+			throw new RestApiException("Username alredy exist",403,SCConst.USER_NOT_FOUND);
+			 
 		}
 
 	}
@@ -45,15 +46,10 @@ public class SoulController {
 
 		SoulEntity soulEntity = soulRepository.authenticateSoul(loginEntity.getUsername(),loginEntity.getPassword());
 		if(soulEntity == null) {
-			throw new RestApiException("Wrong usernam/password",500);
+			throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL);
 		}
 		else{return soulEntity;}	
-
-
-		// validateSoul(soulEntity); To confirm thru mail
-
-
-
+ 
 	}
 
 	@RequestMapping(value = { "/forgotpsw" }, method = RequestMethod.POST)
@@ -65,8 +61,8 @@ public class SoulController {
 		return null;
 	}
 
-	public ErrorResponse getErrorCode(int errorCode, String errorType, String errorMessage) {
-		ErrorResponse e = new ErrorResponse();
+	public ErrorResponseEntity getErrorCode(int errorCode, String errorType, String errorMessage) {
+		ErrorResponseEntity e = new ErrorResponseEntity();
 		e.setErrorCode(errorCode);
 		e.setErrorType(errorType);
 		e.setErrorMessage(errorMessage);
