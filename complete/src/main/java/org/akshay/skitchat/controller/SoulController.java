@@ -31,6 +31,8 @@ public class SoulController {
 		soul.setSoulId(UUID.randomUUID().toString());
 		if( validateNewSoulData(soul)) {
 			soulRepository.save(soul);
+			soul.setSuccessful(true);
+			soul.setResponseMessage("Successful");
 			return soul;
 		}else {
 			//throw new RestApiException("Username alredy exist",403,SCConst.USER_NOT_FOUND);
@@ -54,7 +56,10 @@ public class SoulController {
 			return soulEntity;
 			//throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL);
 		}
-		else{return soulEntity;}	
+		else{
+			soulEntity.setSuccessful(true);
+			soulEntity.setResponseMessage("Successful");
+			return soulEntity;}	
 
 	}
 
