@@ -8,7 +8,9 @@ import org.akshay.skitchat.RestApiException;
 import org.akshay.skitchat.entity.ErrorResponseEntity;
 import org.akshay.skitchat.entity.LoginEntity;
 import org.akshay.skitchat.entity.SoulEntity;
+import org.akshay.skitchat.entity.TokenEntity;
 import org.akshay.skitchat.repository.SoulRepository;
+import org.jboss.logging.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +56,6 @@ public class SoulController {
 			soulEntity.setSuccessful(false);
 			soulEntity.setResponseMessage("Wrong username/password");
 			return soulEntity;
-			//throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL);
 		}
 		else{
 			soulEntity.setSuccessful(true);
@@ -62,6 +63,31 @@ public class SoulController {
 			return soulEntity;}	
 
 	}
+
+
+	@RequestMapping(value = { "/token" }, method = RequestMethod.POST)
+	public Object saveToken( @RequestBody TokenEntity tokenEntity) {
+
+		SoulEntity soulEntity = new SoulEntity();
+		System.out.println("OOOOOO: "+tokenEntity.getFcmToken());
+		System.out.println("OOOOOO: "+tokenEntity.getSoulId());
+		int record = soulRepository.saveToken(tokenEntity.getFcmToken(),tokenEntity.getSoulId());
+
+		if(record == 0) { 
+			soulEntity.setSuccessful(false);
+			soulEntity.setResponseMessage("FCM registration failed, User not found"); 
+			return soulEntity;
+		}
+		else{ 
+			soulEntity.setSuccessful(true);
+			soulEntity.setResponseMessage("Successful"); 
+			return soulEntity;
+		}
+
+	}
+
+
+
 
 	@RequestMapping(value = { "/forgotpsw" }, method = RequestMethod.POST)
 	public Object getInbox(@RequestParam(value = "messageId") String messageId) {
@@ -93,3 +119,4 @@ public class SoulController {
 	}
 
 }
+//throw new RestApiException("Wrong usernam/password",404,SCConst.WRONG_CREDENTIAL); 
