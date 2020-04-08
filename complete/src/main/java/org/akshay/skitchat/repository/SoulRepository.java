@@ -30,9 +30,10 @@ public interface SoulRepository extends JpaRepository<SoulEntity, Integer> {
 	@Query("UPDATE SoulEntity s SET s.fcmToken = :fcmToken WHERE s.soulId = :soulId")
 	int saveToken(@Param(value="fcmToken")String fcmToken, @Param(value="soulId")String soulId);
 
+	
 	/*
-	 * @Query("SELECT SoulEntity s WHERE s.soul_id = :soulId") SoulEntity
-	 * getToken(@Param(value="soulId")String soulId);
+	 * @Query("SELECT SoulEntity s WHERE s.username = :username") SoulEntity
+	 * getToken(@Param(value="username")String username);
 	 */
 
 
@@ -42,4 +43,9 @@ public interface SoulRepository extends JpaRepository<SoulEntity, Integer> {
 	 * @Query("SELECT * s); String userAuth(@Param (value="emailId") String emailId
 	 * , @Param(value="password") String password) ;
 	 */
+	  
+	  
+	  
+	  
+	  
 }

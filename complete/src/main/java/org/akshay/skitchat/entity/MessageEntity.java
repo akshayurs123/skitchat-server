@@ -16,6 +16,8 @@ public class MessageEntity {
 	private String messageId;
 	private String senderId;
 	private String receiverId;
+	private String senderUsername;
+	private String receiverUsername;
 	private String date;
 	private String readStatus;
 	private String messageBody;
@@ -48,6 +50,28 @@ public class MessageEntity {
 	public void setReceiverId(String receiverId) {
 		this.receiverId = receiverId;
 	}
+	
+	
+	public String getSenderUsername() {
+		return senderUsername;
+	}
+
+
+	public void setSenderUsername(String senderUsername) {
+		this.senderUsername = senderUsername;
+	}
+
+
+	public String getReceiverUsername() {
+		return receiverUsername;
+	}
+
+
+	public void setReceiverUsername(String receiverUsername) {
+		this.receiverUsername = receiverUsername;
+	}
+
+
 	public String getDate() {
 		return date;
 	}
